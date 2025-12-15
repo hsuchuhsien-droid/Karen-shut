@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated Title to purely Chinese -->
+    <title>紙上藝術展</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght=300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Define Custom Colors to match the traditional Chinese painting aesthetic */
+        :root {
+            --color-paper-light: #f5f0e6; /* 仿古宣紙淺色 */
+            --color-paper-dark: #e8dfc7;  /* 仿古宣紙深色 */
+            --color-ink: #4e4438;         /* 墨棕色 */
+            --color-olive: #849a71;       /* 柔和橄欖綠 */
+            --color-sepia: #a55f52;       /* 復古硃砂紅 */
+        }
+
+        /* Custom Font Application */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--color-paper-light); 
+            color: var(--color-ink); 
+        }
+        h1, h2, h3, h4, .serif-font {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* Paper Texture */
+        .paper-texture {
+            background-color: var(--color-paper-light);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23849a71' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        /* Re-style key elements with the new palette */
+        .seal-red {
+            background-color: var(--color-sepia); 
+            color: white;
+        }
+
+        .accent-olive {
+            color: var(--color-olive);
+        }
+
+        .border-sepia {
+            border-color: var(--color-sepia);
+        }
+
+        .nav-item.active {
+            border-bottom: 3px solid var(--color-sepia);
+            color: var(--color-sepia);
+            font-weight: 700;
+        }
+        
+        /* Removed .artist-portrait styles since images are removed */
+
+        /* Image styling for exhibits */
+        .exhibit-image {
+            max-height: 300px;
+            width: 100%;
+            object-fit: contain;
+            border: 1px solid var(--color-paper-dark);
+        }
+    </style>
+</head>
+<body class="paper-texture min-h-screen flex flex-col selection:bg-yellow-100 selection:text-ink">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-[var(--color-paper-light)]/95 backdrop-blur-sm border-b border-[var(--color-paper-dark)] shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <!-- Red box text changed from '筆墨' to '紙上' -->
+                    <div class="h-8 w-8 seal-red flex items-center justify-center rounded-sm mr-3 font-serif font-bold text-xs shadow-md">紙上</div>
+                    <!-- Navigation Title changed from '紙上藝術展：筆墨的殘響' to '紙上藝術展' -->
+                    <span class="font-serif text-xl font-bold text-[var(--color-ink)] tracking-widest">紙上藝術展</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="scrollToSection('intro')" class="text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] px-3 py-2 text-sm font-medium transition-colors">策展論述</button>
+                    <button onclick="scrollToSection('gallery')" class="text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] px-3 py-2 text-sm font-medium transition-colors">文物展廳</button>
+                    <button onclick="scrollToSection('artists')" class="text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] px-3 py-2 text-sm font-medium transition-colors">大師檔案</button>
+                    <button onclick="scrollToSection('conclusion')" class="text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] px-3 py-2 text-sm font-medium transition-colors">結語</button>
+                </div>
+                <button class="md:hidden text-[var(--color-ink)]/70" onclick="showMessage('請使用大螢幕獲得最佳體驗，或直接向下捲動。')">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Custom Message Box for Mobile/Alerts (Replaces alert()) -->
+    <div id="messageBox" class="fixed inset-0 z-[100] bg-black bg-opacity-50 hidden items-center justify-center p-4" onclick="hideMessage()">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full border-t-4 border-sepia" onclick="event.stopPropagation()">
+            <h3 class="text-xl font-bold mb-3 serif-font text-[var(--color-sepia)]">提示</h3>
+            <p id="messageContent" class="text-base text-[var(--color-ink)]/90 mb-4"></p>
+            <button onclick="hideMessage()" class="bg-[var(--color-ink)] text-white px-4 py-2 rounded-sm hover:bg-[var(--color-olive)] transition-colors">確定</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative pt-20 pb-24 text-center overflow-hidden bg-[var(--color-paper-dark)] shadow-inner">
+        <div class="relative z-10 max-w-4xl mx-auto px-4">
+            <div class="inline-block mb-4 px-3 py-1 border border-ink/50 rounded-full text-[var(--color-ink)]/70 text-xs tracking-[0.2em] uppercase">線上展覽</div>
+            <h1 class="text-5xl md:text-7xl font-bold text-[var(--color-ink)] mb-6 font-serif tracking-wide leading-tight">
+                筆墨的<span class="text-[var(--color-sepia)]">殘響</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-[var(--color-ink)]/80 font-light mb-10 tracking-widest serif-font">
+                具名文物的失落與追尋
+            </p>
+            <div class="w-24 h-1 bg-[var(--color-olive)] mx-auto mb-10 opacity-80"></div>
+            <p class="max-w-2xl mx-auto text-[var(--color-ink)] leading-relaxed text-lg">
+                「失去」不是終點，而是另一種存在的開始。<br>
+                在物質的灰燼中，尋找精神的餘溫。
+            </p>
+            
+            <div class="mt-12">
+                <button onclick="scrollToSection('gallery')" class="bg-[var(--color-ink)] text-white px-8 py-3 rounded-sm shadow-xl hover:bg-[var(--color-olive)] transition-all duration-300 tracking-wider font-bold">
+                    進入展廳
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: Curatorial Statement -->
+    <section id="intro" class="py-20 bg-[var(--color-paper-light)]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                <!-- Text Content -->
+                <div class="md:col-span-5">
+                    <h2 class="text-3xl font-bold text-[var(--color-ink)] mb-6 border-l-4 border-sepia pl-4 serif-font">
+                        為何凝視「失去」？
+                    </h2>
+                    <p class="text-[var(--color-ink)]/90 mb-4 leading-loose text-justify">
+                        本策展的核心，是探討藝術史中一個深刻且矛盾的命題：「<strong class="text-[var(--color-sepia)]">失去的藝術品，如何比現存的藝術品更具生命力？</strong>」
+                    </p>
+                    <p class="text-[var(--color-ink)]/70 mb-6 leading-loose text-justify">
+                        我們常以「傳世之作」來衡量文物價值，卻忽略了那些因時間、戰亂、政治或意外而殘損、流離、甚至永久消失的「失落」部分。本次展覽聚焦於四組具名作者的經典作品，透過四種「失去」的維度，直面藝術的脆弱與命運的多舛。
+                    </p>
+                </div>
+                
+                <!-- Interactive Loss Types -->
+                <div class="md:col-span-7">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Card 1 -->
+                        <div class="bg-white p-6 rounded-sm shadow-md hover:shadow-lg transition-shadow cursor-default border-t-4 border-olive/50 hover:border-[var(--color-sepia)] group">
+                            <div class="text-[var(--color-olive)] text-4xl mb-3 group-hover:text-[var(--color-sepia)] transition-colors"><i class="fas fa-ghost"></i></div>
+                            <h3 class="text-xl font-bold mb-2 serif-font text-[var(--color-ink)]">真跡的永恆缺席</h3>
+                            <p class="text-sm text-[var(--color-ink)]/70">物質本體永久消失，僅存精神符號。如：王羲之《蘭亭集序》。</p>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="bg-white p-6 rounded-sm shadow-md hover:shadow-lg transition-shadow cursor-default border-t-4 border-olive/50 hover:border-[var(--color-sepia)] group">
+                            <div class="text-[var(--color-olive)] text-4xl mb-3 group-hover:text-[var(--color-sepia)] transition-colors"><i class="fas fa-fire"></i></div>
+                            <h3 class="text-xl font-bold mb-2 serif-font text-[var(--color-ink)]">物質的劫難</h3>
+                            <p class="text-sm text-[var(--color-ink)]/70">火燒、兵燹造成的物理創傷。如：蘇軾《黃州寒食帖》。</p>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="bg-white p-6 rounded-sm shadow-md hover:shadow-lg transition-shadow cursor-default border-t-4 border-olive/50 hover:border-[var(--color-sepia)] group">
+                            <div class="text-[var(--color-olive)] text-4xl mb-3 group-hover:text-[var(--color-sepia)] transition-colors"><i class="fas fa-paintbrush"></i></div>
+                            <h3 class="text-xl font-bold mb-2 serif-font text-[var(--color-ink)]">原創的空缺</h3>
+                            <p class="text-sm text-[var(--color-ink)]/70">真跡不存，依靠摹本追慕大師風采。如：吳道子《送子天王圖》。</p>
+                        </div>
+                        <!-- Card 4 -->
+                        <div class="bg-white p-6 rounded-sm shadow-md hover:shadow-lg transition-shadow cursor-default border-t-4 border-olive/50 hover:border-[var(--color-sepia)] group">
+                            <div class="text-[var(--color-olive)] text-4xl mb-3 group-hover:text-[var(--color-sepia)] transition-colors"><i class="fas fa-clock"></i></div>
+                            <h3 class="text-xl font-bold mb-2 serif-font text-[var(--color-ink)]">歲月的負荷</h3>
+                            <p class="text-sm text-[var(--color-ink)]/70">時間帶來的自然損耗與修復痕跡。如：范寬《溪山行旅圖》。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Main Gallery (Tabs) -->
+    <section id="gallery" class="py-20 min-h-screen">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-[var(--color-sepia)] font-bold tracking-widest text-sm uppercase">展覽廳</span>
+                <h2 class="text-4xl font-bold text-[var(--color-ink)] mt-2 serif-font">文物展廳</h2>
+                <div class="w-12 h-1 bg-[var(--color-olive)] mx-auto mt-4"></div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center border-b border-[var(--color-paper-dark)] mb-12">
+                <button class="nav-item active px-6 py-4 text-lg font-medium text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] transition-all serif-font" onclick="switchTab('unit1', this)">
+                    I. 蘭亭集序
+                </button>
+                <button class="nav-item px-6 py-4 text-lg font-medium text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] transition-all serif-font" onclick="switchTab('unit2', this)">
+                    II. 黃州寒食帖
+                </button>
+                <button class="nav-item px-6 py-4 text-lg font-medium text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] transition-all serif-font" onclick="switchTab('unit3', this)">
+                    III. 送子天王圖
+                </button>
+                <button class="nav-item px-6 py-4 text-lg font-medium text-[var(--color-ink)]/70 hover:text-[var(--color-ink)] transition-all serif-font" onclick="switchTab('unit4', this)">
+                    IV. 溪山行旅圖
+                </button>
+            </div>
+
+            <!-- Content Container -->
+            <div id="exhibit-content" class="bg-white p-8 md:p-12 rounded-sm shadow-lg border-2 border-[var(--color-paper-dark)] min-h-[600px] transition-opacity duration-300">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Artist Archives (已修改為純文字排版，強調人名) -->
+    <section id="artists" class="py-20 bg-[var(--color-ink)] text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4 serif-font">大師檔案</h2>
+                <p class="text-[var(--color-paper-light)]/80">穿越時空的筆墨大師，他們的作品本身就是對「失落」概念的最佳闡釋。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Artist 1: Wang Xizhi -->
+                <div class="bg-[var(--color-ink)]/90 p-6 rounded-sm border border-[var(--color-sepia)]/50 hover:border-[var(--color-sepia)] transition-colors shadow-xl h-full">
+                    
+                    <h3 class="text-3xl font-bold text-[var(--color-paper-light)] mb-1 font-serif">王羲之</h3>
+                    <div class="text-xs text-[var(--color-olive)] mb-3 uppercase tracking-widest">303-361 | 東晉</div>
+                    
+                    <!-- New Separator -->
+                    <div class="h-0.5 w-1/4 bg-[var(--color-sepia)]/80 my-4"></div>
+
+                    <p class="text-sm text-[var(--color-paper-light)]/80 leading-relaxed">
+                        「書聖」。其真跡的陪葬，使得他的筆法成為後世數千年學習和摹仿的標準和信仰。他本人成為了「真跡失落」後，藝術精神永恆存在的最佳例證。
+                    </p>
+                </div>
+                <!-- Artist 2: Su Shi -->
+                <div class="bg-[var(--color-ink)]/90 p-6 rounded-sm border border-[var(--color-sepia)]/50 hover:border-[var(--color-sepia)] transition-colors shadow-xl h-full">
+
+                    <h3 class="text-3xl font-bold text-[var(--color-paper-light)] mb-1 font-serif">蘇軾</h3>
+                    <div class="text-xs text-[var(--color-olive)] mb-3 uppercase tracking-widest">1037-1101 | 北宋</div>
+                    
+                    <!-- New Separator -->
+                    <div class="h-0.5 w-1/4 bg-[var(--color-sepia)]/80 my-4"></div>
+
+                    <p class="text-sm text-[var(--color-paper-light)]/80 leading-relaxed">
+                        文學家、書法家。其創作的《寒食帖》不僅是他個人情感失落的寫照，其作品載體的殘損，也讓這件國寶成為時代劫難的縮影。
+                    </p>
+                </div>
+                <!-- Artist 3: Wu Daozi -->
+                <div class="bg-[var(--color-ink)]/90 p-6 rounded-sm border border-[var(--color-sepia)]/50 hover:border-[var(--color-sepia)] transition-colors shadow-xl h-full">
+
+                    <h3 class="text-3xl font-bold text-[var(--color-paper-light)] mb-1 font-serif">吳道子</h3>
+                    <div class="text-xs text-[var(--color-olive)] mb-3 uppercase tracking-widest">約685-758 | 唐</div>
+                    
+                    <!-- New Separator -->
+                    <div class="h-0.5 w-1/4 bg-[var(--color-sepia)]/80 my-4"></div>
+
+                    <p class="text-sm text-[var(--color-paper-light)]/80 leading-relaxed">
+                        「畫聖」。擅長壁畫，畫風豪邁奔放。他的真跡空缺，證明了藝術的價值有時並不需要物質本體證明，僅憑傳說和摹本即可流芳百世。
+                    </p>
+                </div>
+                <!-- Artist 4: Fan Kuan -->
+                <div class="bg-[var(--color-ink)]/90 p-6 rounded-sm border border-[var(--color-sepia)]/50 hover:border-[var(--color-sepia)] transition-colors shadow-xl h-full">
+
+                    <h3 class="text-3xl font-bold text-[var(--color-paper-light)] mb-1 font-serif">范寬</h3>
+                    <div class="text-xs text-[var(--color-olive)] mb-3 uppercase tracking-widest">約950-1032 | 北宋</div>
+                    
+                    <!-- New Separator -->
+                    <div class="h-0.5 w-1/4 bg-[var(--color-sepia)]/80 my-4"></div>
+
+                    <p class="text-sm text-[var(--color-paper-light)]/80 leading-relaxed">
+                        山水畫家，開創雄偉畫風。其作品經受的自然損耗，提醒我們即使是雄偉的藝術，也必須向時間的侵蝕低頭。
+                    </p>
+                </div>
+            </div>
+            <!-- REMOVED: Image source note has been removed -->
+        </div>
+    </section>
+
+    <!-- Section 4: Conclusion -->
+    <section id="conclusion" class="py-24 bg-[var(--color-paper-dark)]">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <i class="fas fa-quote-left text-3xl text-[var(--color-olive)] mb-4 block"></i>
+                <h2 class="text-3xl md:text-5xl font-bold text-[var(--color-ink)] mb-6 serif-font leading-snug">
+                    從殘缺中重建的記憶
+                </h2>
+                <div class="w-16 h-16 border-2 border-[var(--color-olive)] rounded-full mx-auto mb-8 flex items-center justify-center">
+                    <span class="text-[var(--color-olive)] font-serif">終</span>
+                </div>
+            </div>
+            <p class="text-lg text-[var(--color-ink)]/90 leading-loose mb-8">
+                「失去」是文物的宿命，也是其價值的一部分。無論是真跡的永恆消失、火燒的焦痕，還是筆墨的自然風化，這些殘缺都強烈地提醒我們<strong>歷史的在場</strong>。
+            </p>
+            <p class="text-lg text-[var(--color-ink)]/90 leading-loose">
+                讓我們將「失去」視為一種<strong>警鐘</strong>，它促使我們更深刻地凝視與珍藏，讓文物背後的精神與故事得以綿延不絕。
+            </p>
+            <div class="mt-12 opacity-80">
+                <!-- 底部的小紅印維持原文字，與上方導航欄紅框區隔 -->
+                <div class="seal-red w-8 h-8 mx-auto text-[10px] leading-8 text-white font-serif rounded-sm shadow-md">筆墨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--color-ink)] text-[var(--color-paper-light)]/70 py-8 text-center text-xs">
+        <p>&copy; 2025 紙上藝術展：筆墨的殘響. 僅供學習用途。</p>
+        <p class="mt-2">採用傳統中華美學與 Gemini API 設計。</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Custom Message Box Functions (Replacing alert())
+        function showMessage(content) {
+            document.getElementById('messageContent').textContent = content;
+            document.getElementById('messageBox').classList.remove('hidden');
+            document.getElementById('messageBox').classList.add('flex');
+        }
+
+        function hideMessage() {
+            document.getElementById('messageBox').classList.add('hidden');
+            document.getElementById('messageBox').classList.remove('flex');
+        }
+
+        const exhibits = {
+            unit1: {
+                title: "真跡的永恆缺席",
+                subtitle: "王羲之《蘭亭集序》",
+                author: "王羲之",
+                type: "Absence",
+                desc: "《蘭亭集序》真跡傳聞隨唐太宗李世民入昭陵，完成了物質本體的「永恆缺席」。我們今天所見的，無論是神龍本或虞世南摹本，皆是對原件的追憶。真跡的失落，迫使我們將鑑賞重點從單純的筆鋒技藝，轉向對「書聖」精神的追尋。",
+                sourceUrl: "http://www.ltfc.net/albumView/67e22f44b7c3d74b0b09b540?page=1&sourceId=6780b9355fa9475989b1b1df&type=SUFA&sortBy=position&sortAsc=true",
+                displayImageUrl: "https://placehold.co/600x300/e8dfc7/4e4438?text=蘭亭集序|摹本圖像\n(點擊跳轉原網址)", 
+                details: [
+                    { label: "創作年代", value: "353年 (東晉)" },
+                    { label: "現存狀態", value: "真跡失傳，僅存摹本" },
+                    { label: "核心價值", value: "天下第一行書" }
+                ]
+            },
+            unit2: {
+                title: "物質的劫難與重生",
+                subtitle: "蘇軾《黃州寒食帖》",
+                author: "蘇軾",
+                type: "Trauma",
+                desc: "《黃州寒食帖》承載了蘇軾被貶黃州的政治失意。更令人唏噓的是，清末它在日本展覽時遭遇火災，卷上留下了明顯的焦痕。這些焦黑的痕跡，成為了歷史暴力與時代動盪無法抹滅的印記。",
+                sourceUrl: "http://www.ltfc.net/view/SUFA/6780b9365fa9475989b1b2b3",
+                displayImageUrl: "https://placehold.co/600x300/e8dfc7/4e4438?text=黃州寒食帖|殘損樣貌\n(點擊跳轉原網址)",
+                details: [
+                    { label: "創作年代", value: "1082年 (北宋)" },
+                    { label: "特殊印記", value: "火燒焦痕" },
+                    { label: "核心價值", value: "天下第三行書" }
+                ]
+            },
+            unit3: {
+                title: "大師的空缺與追慕",
+                subtitle: "吳道子《送子天王圖》",
+                author: "吳道子 (摹本)",
+                type: "Void",
+                desc: "吳道子被尊為「畫聖」，但真跡多不存世。這造成了藝術史上原創筆意的巨大空缺。《送子天王圖》作為宋人摹本，成為連接逝去輝煌時代的唯一通道。我們追尋的，是摹本上承載的那份「氣」和「韻」。",
+                sourceUrl: "http://www.ltfc.net/view/SUHA/6246c6d4f244380e667e6ed8",
+                displayImageUrl: "https://placehold.co/600x300/e8dfc7/4e4438?text=送子天王圖|宋人摹本\n(點擊跳轉原網址)",
+                details: [
+                    { label: "原作者", value: "吳道子 (唐)" },
+                    { label: "現存版本", value: "宋代摹本" },
+                    { label: "風格特徵", value: "吳帶當風" }
+                ]
+            },
+            unit4: {
+                title: "歲月的印記與負荷",
+                subtitle: "范寬《溪山行旅圖》",
+                author: "范寬",
+                type: "Erosion",
+                desc: "宋代山水畫的宏偉氣魄，也難抵擋時間的「侵蝕」。絹本脆弱，易受潮濕、蟲蛀影響。每一次的重新裝裱，都是為了延續其生命，但也無可避免地對原畫作造成「干預」。",
+                sourceUrl: "http://www.ltfc.net/view/SUHA/62281533c6b0b46d2731bb8c",
+                displayImageUrl: "https://placehold.co/600x300/e8dfc7/4e4438?text=溪山行旅圖|歲月痕跡\n(點擊跳轉原網址)",
+                details: [
+                    { label: "創作年代", value: "北宋初期" },
+                    { label: "材質", value: "絹本墨筆" },
+                    { label: "發現", value: "樹叢中隱藏簽名" }
+                ]
+            }
+        };
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollView({ behavior: 'smooth' });
+        }
+
+        function switchTab(unitId, btnElement) {
+            // Update UI Tabs
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.add('text-[var(--color-ink)]/70'));
+            
+            btnElement.classList.add('active');
+            btnElement.classList.remove('text-[var(--color-ink)]/70');
+
+            renderExhibitContent(unitId);
+        }
+
+        function renderExhibitContent(unitId) {
+            const exhibit = exhibits[unitId];
+            const contentDiv = document.getElementById('exhibit-content');
+
+            // Fade out current content
+            contentDiv.style.opacity = 0;
+
+            setTimeout(() => {
+                let html = `
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                        
+                        <!-- Left: Image and Meta (md:col-span-5 to give more space for image) -->
+                        <div class="md:col-span-5">
+                            <h3 class="text-3xl font-bold text-[var(--color-ink)] mb-1 serif-font">${exhibit.subtitle}</h3>
+                            <p class="text-xl text-[var(--color-sepia)] mb-4 font-light border-b border-olive/30 pb-2">${exhibit.title}</p>
+                            
+                            <!-- 文物圖像 - 已加入點擊連結 -->
+                            <div class="flex justify-center items-center p-4 bg-[var(--color-paper-light)] border-2 border-sepia/30 rounded-sm shadow-inner group transition-all duration-300 hover:shadow-xl hover:border-[var(--color-sepia)]">
+                                <a href="${exhibit.sourceUrl}" target="_blank" title="點擊在新分頁開啟文物連結：${exhibit.sourceUrl}">
+                                    <img src="${exhibit.displayImageUrl}" alt="${exhibit.subtitle} 圖像" class="exhibit-image group-hover:scale-[1.02] transition-transform duration-300">
+                                    <p class="text-center text-xs text-[var(--color-ink)]/60 mt-2 italic">點擊圖像在新分頁中查看原件連結</p>
+                                </a>
+                            </div>
+
+                            <div class="mt-6 p-4 bg-[var(--color-paper-dark)] rounded-sm border border-olive/30">
+                                <h4 class="text-lg font-bold mb-3 accent-olive serif-font">文物基本資料</h4>
+                                ${exhibit.details.map(d => 
+                                    `<div class="flex justify-between border-b border-ink/10 py-1 last:border-b-0">
+                                        <span class="text-sm text-[var(--color-ink)]/80">${d.label}</span>
+                                        <span class="text-sm font-medium text-[var(--color-ink)]">${d.value}</span>
+                                    </div>`
+                                ).join('')}
+                            </div>
+
+                        </div>
+                        
+                        <!-- Right: Narrative (md:col-span-7, now occupies the space where the chart was) -->
+                        <div class="md:col-span-7">
+                            <h4 class="text-2xl font-bold mb-4 border-l-4 border-olive pl-3 serif-font">
+                                策展觀點：${exhibit.type}
+                            </h4>
+                            <p class="text-[var(--color-ink)]/90 leading-relaxed text-justify mb-8 text-lg">
+                                ${exhibit.desc}
+                            </p>
+
+                            <div class="p-6 bg-[var(--color-paper-light)] rounded-sm border border-ink/10 mt-8">
+                                <h5 class="text-xl font-bold mb-3 text-[var(--color-sepia)] serif-font">失落的價值</h5>
+                                <p class="text-base text-[var(--color-ink)]/80 leading-relaxed">
+                                    此文物的價值並不依賴於其物質的完整性，而是在於其背後承載的歷史敘事、作者的精神寄託，以及歷代鑑藏家所賦予的文化重量。每一道殘損，都是歷史的簽名。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                contentDiv.innerHTML = html;
+                contentDiv.style.opacity = 1;
+
+            }, 300); // Wait for fade-out transition
+        }
+
+        // Initialize the first tab content on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Trigger the initial render for unit1
+            // Use querySelector to find the correct button for the first tab
+            const firstTabButton = document.querySelector('.nav-item');
+            if (firstTabButton) {
+                switchTab('unit1', firstTabButton);
+            }
+        });
+        
+        // Fix for scrollIntoView in some environments
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    </script>
+</body>
+</html>
